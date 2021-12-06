@@ -12,3 +12,15 @@
 *.pyc
 *.egg-info
 .pytest_cache
+
+#Output files
+*.png
+
+# Python runtime
+*.pyc
+*.egg-info
+.pytest_cache
+
+# Virtual environments
+venv/
+.venv/
