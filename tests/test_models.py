@@ -5,11 +5,12 @@ import numpy.testing as npt
 import pytest
 
 
+TEST_VEC_ZEROS = [[0,0],[0,0],[0,0]]
 
 @pytest.mark.parametrize(
     "test, expected",
     [
-     ([[0, 0], [0, 0], [0, 0]], [0,0]),
+     (TEST_VEC_ZEROS, [0,0]),
      ([[1, 2], [3, 4], [5, 6]], [3,4])
      ])
 def test_daily_mean(test, expected):
@@ -18,23 +19,30 @@ def test_daily_mean(test, expected):
     npt.assert_array_equal(daily_mean(np.array(test)), np.array(expected))
 
 
-def test_dailiy_min():
+
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+     (TEST_VEC_ZEROS, [0,0]),
+     ([[3,5],[5,7],[9,12]], [3,5]),
+     ([[-3,-5],[6,-3],[-1,-3]], [-3,-5])
+     ])
+def test_daily_min(test, expected):
     """ trivial test for daily_min """
     from inflammation.models import daily_min
-    test_input = np.array([[1,1],
-                           [5,7],
-                           [9,2]])
-    test_result = np.array([1,1])
-    npt.assert_array_equal(daily_min(test_input), test_result)
+    npt.assert_array_equal(daily_min(np.array(test)), expected)
 
-def test_daily_max():
+@pytest.mark.parametrize(
+    "test, expected",
+    [
+     (TEST_VEC_ZEROS, [0,0]),
+     ([[3,5],[5,7],[9,12]], [9,12]),
+     ([[-3,-5],[6,-3],[-1,-3]], [6,-3])
+     ])
+def test_daily_max(test, expected):
     """ trivial test for daily max """
     from inflammation.models import daily_max
-    test_input = np.array([[1,1],
-                           [5,7],
-                           [9,2]])
-    test_result = np.array([9,7])
-    npt.assert_array_equal(daily_max(test_input), test_result)
+    npt.assert_array_equal(daily_max(np.array(test)), expected)
 
 def test_daily_min_string():
     """Test for TypeError when passing strings"""
