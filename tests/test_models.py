@@ -30,4 +30,23 @@ def test_daily_mean_integers():
     npt.assert_array_equal(daily_mean(test_input), test_result)
 
 
+def test_dailiy_min():
+    """ trivial test for daily_min """
+    from inflammation.models import daily_min
+    test_input = np.array([[1,1],
+                           [5,7],
+                           [9,2]])
+    test_result = np.array([1,1])
+    npt.assert_array_equal(daily_min(test_input), test_result)
+
+def test_daily_max():
+    """ trivial test for daily max """
+    from inflammation.models import daily_max
+    test_input = np.array([[1,1],
+                           [5,7],
+                           [9,2]])
+    test_result = np.array([9,7])
+    npt.assert_array_equal(daily_max(test_input), test_result)
+
+
 # TODO(lesson-robust) Implement tests for the other statistical functions
